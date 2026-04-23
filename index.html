@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>alex50027319 | Blog</title>
+    <meta
+      name="description"
+      content="UAV routing, reinforcement learning, and engineering notes."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="logo" href="#">ALEX<span>LAB</span></a>
+        <nav>
+          <a href="#posts">Posts</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" aria-label="테마 변경">
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <p class="eyebrow">Research × Engineering</p>
+        <h1>
+          UAV Routing과 RL 실험 기록을
+          <br />
+          깔끔하게 쌓아가는 블로그
+        </h1>
+        <p class="hero-copy">
+          실험 회고, 코드 아키텍처, 성능 비교 결과를 정리합니다.
+          마크다운 없이도 바로 수정 가능한 단일 정적 페이지 구조입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#posts">최근 글 보기</a>
+          <a class="btn ghost" href="https://github.com/alex50027319">GitHub</a>
+        </div>
+      </section>
+
+      <section id="posts" class="container section">
+        <div class="section-head">
+          <h2>Latest Posts</h2>
+          <p>새 글은 `script.js` 배열에 항목만 추가하면 됩니다.</p>
+        </div>
+        <div id="postGrid" class="post-grid"></div>
+      </section>
+
+      <section id="projects" class="container section">
+        <div class="section-head">
+          <h2>Featured Projects</h2>
+        </div>
+        <div class="project-grid">
+          <article class="card">
+            <h3>IPP-MARL</h3>
+            <p>Multi-agent RL 기반 정보 수집 경로 계획 연구 프로젝트.</p>
+            <a href="https://github.com/alex50027319/MADRL_UAV">Repository</a>
+          </article>
+          <article class="card">
+            <h3>Experiment Notes</h3>
+            <p>파라미터 튜닝, 재현성, 성능 곡선 비교를 정리하는 로그 허브.</p>
+            <a href="#posts">Read Notes</a>
+          </article>
+          <article class="card">
+            <h3>Simulation Toolkit</h3>
+            <p>Windows 실행 스크립트와 시뮬레이션 운영 팁 공유.</p>
+            <a href="#about">See Details</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="container section about">
+        <h2>About</h2>
+        <p>
+          이 페이지는 GitHub Pages 정적 호스팅으로 운영됩니다. 빌드 도구 없이
+          `index.html`, `style.css`, `script.js` 세 파일만으로 관리되며, 필요 시
+          Jekyll/Hugo/Next.js로 확장 가능합니다.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> alex50027319. Built with GitHub Pages.</p>
+        <a href="https://github.com/alex50027319/alex50027319.github.io"
+          >View Source</a
+        >
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
