@@ -40,11 +40,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.1. 최적의 다중 에이전트 정보 획득 경로 계획 목표
 
 * **수식:**
-    ```latex
-    \[
-    \psi^* = \arg\max_{\psi \in \Psi^N} I(\psi), \quad \text{s.t. } C(\psi_i) \leq B \quad \forall i \in \{1, \dots, N\} \quad (1)
-    \]
-    ```
+$$
+\psi^* = \arg\max_{\psi \in \Psi^N} I(\psi), \quad \text{s.t. } C(\psi_i) \leq B \quad \forall i \in \{1, \dots, N\} \quad (1)
+$$
 * **설명:** \(N\)개의 UAV 팀(\(\psi\))의 최적 경로를 찾아 전체 정보량(\(I(\psi)\))을 최대화하는 것이 목표입니다. 각 UAV(`i`)의 경로 비용(`C(ψ_i)`)은 예산(`B`)을 초과할 수 없습니다. 비용은 본 논문에서 측정 횟수로 정의됩니다.
 * **보완점:**
   * **비용 모델의 복잡성:** 현재 비용 모델은 단순한 측정 횟수로, 실제 UAV 운용에서 중요한 에너지 소모, 비행 시간, 안전 거리 유지 등 복합적인 요소를 충분히 반영하지 못합니다. 더 현실적인 시나리오를 위해서는 이러한 추가적인 제약 조건들을 비용 함수에 통합해야 합니다.
@@ -53,11 +51,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.2. 정보량 측정 기준 (Information Criterion)
 
 * **수식:**
-    ```latex
-    \[
-    I(\psi^{t+1}) = \sum_{m=0}^{B-t-1} \left[H(M | z^{0:t+m}, p^{0:t+m}) - H(M | z^{0:t+m+1}, p^{0:t+m+1})\right] \quad (2)
-    \]
-    ```
+$$
+I(\psi^{t+1}) = \sum_{m=0}^{B-t-1} \left[H(M | z^{0:t+m}, p^{0:t+m}) - H(M | z^{0:t+m+1}, p^{0:t+m+1})\right] \quad (2)
+$$
 * **설명:** 현재 시간 `t+1`부터 미션 예산 `B`가 소진될 때까지의 미래 측정값(`ψ^{t+1}`)으로부터 얻을 수 있는 정보량을 정의합니다. 각 시간 단계에서 맵의 엔트로피(`H(M)`) 감소량을 합산하여 계산합니다.
 * **보완점:**
   * **미래 예측의 불확실성:** 미래에 얻을 것으로 `예측되는` 정보량이므로 실제 측정값과의 불일치 가능성이 존재합니다. 예측 모델의 정확도를 높이는 것이 중요합니다.
@@ -66,11 +62,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.3. 맵 엔트로피 정의 (Map Entropy Definition)
 
 * **수식:**
-    ```latex
-    \[
-    H(M | z^{0:t}, p^{0:t}) = \sum_{j=1}^M \left[W(M_j) p(M_j | z^{0:t}, p^{0:t}) \log(p(M_j | z^{0:t}, p^{0:t})) + W(M_j) (1 - p(M_j | z^{0:t}, p^{0:t})) \log(1 - p(M_j | z^{0:t}, p^{0:t}))\right] \quad (3)
-    \]
-    ```
+$$
+H(M | z^{0:t}, p^{0:t}) = \sum_{j=1}^M \left[W(M_j) p(M_j | z^{0:t}, p^{0:t}) \log(p(M_j | z^{0:t}, p^{0:t})) + W(M_j) (1 - p(M_j | z^{0:t}, p^{0:t})) \log(1 - p(M_j | z^{0:t}, p^{0:t}))\right] \quad (3)
+$$
 * **설명:** 시간 `t`까지의 측정값을 기반으로 한 전체 맵 `M`의 엔트로피를 계산합니다. 각 맵 셀(`M_j`)의 중요도(`W(M_j)`)와 해당 셀이 "흥미로운" 클래스에 속할 사후 확률을 고려합니다.
 * **보완점:**
   * **가중치 `W(M_j)`의 민감도:** `w1`, `w2` 값의 설정이 성능에 큰 영향을 미칠 수 있습니다. 이 가중치를 임무 목표에 따라 동적으로 조절하거나, 학습 과정에서 함께 최적화하는 방법을 고려할 수 있습니다.
@@ -79,11 +73,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.4. 중요도 가중치 정의 (Importance Weighting Definition)
 
 * **수식:**
-    ```latex
-    \[
-    W(M_j) = \begin{cases} w_1 & \text{if } p(M_j | z^{0:t}, p^{0:t}) > 0.5 \\ w_2 & \text{if } p(M_j | z^{0:t}, p^{0:t}) < 0.5 \\ 0.5 & \text{else} \end{cases} \quad (4)
-    \]
-    ```
+$$
+W(M_j) = \begin{cases} w_1 & \text{if } p(M_j | z^{0:t}, p^{0:t}) > 0.5 \\ w_2 & \text{if } p(M_j | z^{0:t}, p^{0:t}) < 0.5 \\ 0.5 & \text{else} \end{cases} \quad (4)
+$$
 * **설명:** 맵 셀의 사후 확률에 따라 가중치를 할당하여, UAV가 "잠재적으로 흥미로운 영역"에 초점을 맞춰 경로를 계획하도록 장려합니다.
 * **보완점:**
   * **이진 분류의 한계:** "흥미로운" 클래스를 이진 분류(0.5 기준)로 나누는 것은 단순하지만, 실제 환경에서는 관심 대상의 "정도"가 다양할 수 있습니다. 다중 클래스 분류나 연속적인 중요도 맵을 사용하는 것이 더 정교한 접근이 될 수 있습니다.
@@ -92,11 +84,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.5. 보상 함수 (Reward Function)
 
 * **수식:**
-    ```latex
-    \[
-    R_t(s_t, u_t, s_{t+1}) = \alpha \frac{H(M_t) - H(M_{t+1})}{H(M_t)} + \beta \quad (5)
-    \]
-    ```
+$$
+R_t(s_t, u_t, s_{t+1}) = \alpha \frac{H(M_t) - H(M_{t+1})}{H(M_t)} + \beta \quad (5)
+$$
 * **설명:** 시간 `t`에 취한 행동(`u_t`)으로 인해 발생하는 맵 엔트로피의 감소량에 비례하여 보상을 부여합니다. `H(M_t)`로 정규화하여 보상 크기를 일정하게 유지하고, `α`, `β`는 스케일링 요소입니다.
 * **보완점:**
   * **정규화 항의 불안정성:** 미션 후반부에 `H(M_t)`가 0에 수렴하면 정규화 항이 불안정해질 수 있습니다. 분모에 작은 상수를 더하거나 다른 정규화 방법을 고려할 수 있습니다.
@@ -105,11 +95,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.6. 어드밴티지 함수 (Advantage Function)
 
 * **수식:**
-    ```latex
-    \[
-    A_t^i(s_t, u_t) = Q^\pi (s_t, u_t) - \sum_{u_t'^i \in U} \pi(u_t'^i | \omega_t^i) Q^\pi(s_t, (u_t^{-i}, u_t'^i)) \quad (6)
-    \]
-    ```
+$$
+A_t^i(s_t, u_t) = Q^\pi (s_t, u_t) - \sum_{u_t'^i \in U} \pi(u_t'^i | \omega_t^i) Q^\pi(s_t, (u_t^{-i}, u_t'^i)) \quad (6)
+$$
 * **설명:** COMA 알고리즘에서 신용 할당 문제를 해결하기 위해 사용됩니다. 에이전트 `i`의 실제 행동이 기대치 대비 얼마나 더 좋은 결과를 가져왔는지를 측정하여, 팀 전체 성능에 대한 개별 에이전트의 "추가적인" 기여도를 분리해냅니다.
 * **보완점:**
   * **기준선(Baseline)의 정확성:** Critic 네트워크의 학습 성능에 따라 어드밴티지 추정이 영향을 받을 수 있습니다.
@@ -118,11 +106,9 @@ permalink: /blog/2026/04/23/multi-uav-adaptive-path-planning-paper-analysis/
 ### 3.7. 손실 함수 (Loss Function)
 
 * **수식:**
-    ```latex
-    \[
-    L = - \log \pi(u_t^i| \omega_t^i) A_t^i(s_t, u_t) \quad (7)
-    \]
-    ```
+$$
+L = - \log \pi(u_t^i| \omega_t^i) A_t^i(s_t, u_t) \quad (7)
+$$
 * **설명:** 정책 `π`를 최적화하기 위한 손실 함수로, 정책 그래디언트 정리를 기반으로 합니다. 어드밴티지(`A_t^i`)가 양수이면 해당 행동의 로그 확률을 증가시키고, 음수이면 감소시킵니다.
 * **보완점:**
   * **정책 학습의 안정성:** 정책 그래디언트 방법은 높은 분산을 가질 수 있어 학습이 불안정할 수 있습니다. PPO나 TRPO와 같은 정책 업데이트 제한 기법을 결합하여 안정성과 샘플 효율성을 개선할 수 있습니다.
