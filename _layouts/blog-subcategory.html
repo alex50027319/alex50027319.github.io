@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<section class="hero">
+  <h1>{{ page.category_name }} / {{ page.subcategory_name }}</h1>
+  <p>{{ page.description }}</p>
+</section>
+
+<section class="section-title">
+  <h2>글 목록</h2>
+  <ul class="post-list" data-paginate data-per-page="10" data-empty-text="아직 등록된 글이 없습니다.">
+    {% assign match_count = 0 %}
+    {% for post in site.posts %}
+      {% if post.categories contains page.category_name and post.categories contains page.subcategory_name %}
+      {% assign match_count = match_count | plus: 1 %}
+      <li class="js-page-item">
+        <p class="post-meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+        <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+        <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+        <div class="tag-list">
+          {% for tag in post.tags %}
+          <a class="tag" href="{{ '/tags/#tag-' | append: tag | slugify | relative_url }}">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% if match_count == 0 %}
+  <p class="post-meta">아직 등록된 글이 없습니다.</p>
+  {% endif %}
+</section>

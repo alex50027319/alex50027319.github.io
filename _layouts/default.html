@@ -31,7 +31,7 @@
                 <ul>
                   {% for sub in top.children %}
                   <li>
-                    <a href="{{ '/blog/#' | append: top.slug | append: '-' | append: sub.slug | relative_url }}">
+                    <a href="{{ '/blog/' | append: top.slug | append: '/' | append: sub.slug | append: '/' | relative_url }}">
                       {{ sub.name }}
                     </a>
                   </li>
