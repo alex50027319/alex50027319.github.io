@@ -1,0 +1,45 @@
+- name: DevOps
+  slug: devops
+  children:
+    - name: cloud
+      slug: cloud
+    - name: build
+      slug: build
+    - name: cicd
+      slug: cicd
+    - name: monitoring
+      slug: monitoring
+
+- name: AI
+  slug: ai
+  children:
+    - name: 딥러닝
+      slug: deep-learning
+    - name: 강화학습
+      slug: reinforcement-learning
+    - name: AI agent
+      slug: ai-agent
+
+- name: 논문
+  slug: paper
+  children:
+    - name: 관련연구
+      slug: related-work
+    - name: 이론학습
+      slug: theory
+    - name: 구현
+      slug: implementation
+
+- name: 자격증
+  slug: certificates
+  children:
+    - name: 리눅스
+      slug: linux
+    - name: ADP
+      slug: adp
+    - name: SQLP
+      slug: sqlp
+    - name: AWS
+      slug: aws
+    - name: 네트워크
+      slug: network

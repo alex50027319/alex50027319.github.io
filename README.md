@@ -1,31 +1,46 @@
 # alex50027319.github.io
 
-GitHub Pages 기반 개인 블로그/포트폴리오 사이트입니다.
+GitHub Pages + Jekyll 기반 개인 블로그/포트폴리오 사이트입니다.
 
-## 로컬 수정
+## 주요 메뉴
 
-- `index.html`: 구조/문구
-- `style.css`: 디자인
-- `script.js`: 포스트 목록 데이터 및 상호작용
+- `Project`
+- `Blog` (카테고리/태그 자동 분류)
+- `About Me`
+- `기타 정보`
 
-## 배포 방법
+## 블로그 자동 분류 방식
 
-1. GitHub에서 새 public 저장소 생성:
-   - 이름: `alex50027319.github.io`
-2. 아래 명령으로 연결 후 푸시:
+- 포스트는 `_posts/YYYY-MM-DD-title.md` 형식으로 추가합니다.
+- Front Matter의 `categories`와 `tags`를 기준으로 `/blog/`, `/tags/` 페이지에 자동 반영됩니다.
 
-```powershell
-git init
-git add .
-git commit -m "Initialize GitHub Pages blog"
-git branch -M main
-git remote add origin https://github.com/alex50027319/alex50027319.github.io.git
-git push -u origin main
+```yaml
+---
+title: "예시 포스트"
+date: 2026-04-23
+categories: ["AI", "강화학습"]
+tags: ["COMA", "MARL", "UAV"]
+---
 ```
 
-3. 접속:
-   - <https://alex50027319.github.io>
+## 카테고리 체계
 
-## 커스텀 도메인(선택)
+- DevOps
+  - cloud, build, cicd, monitoring
+- AI
+  - 딥러닝, 강화학습, AI agent
+- 논문
+  - 관련연구, 이론학습, 구현
+- 자격증
+  - 리눅스, ADP, SQLP, AWS, 네트워크
 
-- 도메인을 사용할 경우 루트에 `CNAME` 파일을 추가하고 DNS를 연결하세요.
+## 로컬 실행(선택)
+
+Ruby/Jekyll 환경이 있으면 아래로 로컬 실행할 수 있습니다.
+
+```powershell
+bundle install
+bundle exec jekyll serve
+```
+
+브라우저에서 `http://localhost:4000` 접속

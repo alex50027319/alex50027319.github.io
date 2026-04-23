@@ -1,0 +1,25 @@
+title: AlexLab
+description: Research notes on UAV routing, reinforcement learning, and engineering.
+url: "https://alex50027319.github.io"
+baseurl: ""
+lang: ko
+timezone: Asia/Seoul
+
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: alex50027319
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
